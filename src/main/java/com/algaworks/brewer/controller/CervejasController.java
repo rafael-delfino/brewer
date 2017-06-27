@@ -14,10 +14,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.algaworks.brewer.model.Cerveja;
 import com.algaworks.brewer.model.Origem;
 import com.algaworks.brewer.model.Sabor;
+import com.algaworks.brewer.repository.Cervejas;
 import com.algaworks.brewer.repository.Estilos;
 import com.algaworks.brewer.service.CadastroCervejaService;
 
 @Controller
+@RequestMapping("/cervejas")
 public class CervejasController {
 
 	@Autowired
@@ -26,7 +28,10 @@ public class CervejasController {
 	@Autowired
 	public CadastroCervejaService cadastroCervejaService;
 	
-	@RequestMapping("/cervejas/novo")
+	@Autowired
+	public Cervejas cervejas;
+	
+	@RequestMapping("/novo")
 	public ModelAndView novo(Cerveja cerveja) {
 		ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
 		mv.addObject("sabores", Sabor.values());
@@ -35,7 +40,7 @@ public class CervejasController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
+	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return novo(cerveja);
@@ -46,5 +51,14 @@ public class CervejasController {
 		return new ModelAndView("redirect:/cervejas/novo");
 	}
 	
+	@RequestMapping
+	public ModelAndView pesquisar() {
+		ModelAndView mv = new ModelAndView("/cerveja/PesquisaCervejas");
+		mv.addObject("sabores", Sabor.values());
+		mv.addObject("estilos", estilos.findAll());
+		mv.addObject("origens", Origem.values());
+		mv.addObject("cervejas", cervejas.findAll());
+		return mv;
+	}
 	
 }
