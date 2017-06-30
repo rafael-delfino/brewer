@@ -26,8 +26,6 @@ public class FotoStorageLocal implements FotoStorage {
 
 	public FotoStorageLocal() {
 		this(getDefault().getPath(System.getProperty("user.home"), ".brewerfotos"));
-		// this(getDefault().getPath(System.getenv("USERPROFILE"),
-		// ".brewerfotos"));
 	}
 
 	public FotoStorageLocal(Path path) {
@@ -41,7 +39,7 @@ public class FotoStorageLocal implements FotoStorage {
 		if (files != null && files.length > 0) {
 			MultipartFile arquivo = files[0];
 			novoNome = renomearArquivo(arquivo.getOriginalFilename());
-
+			
 			try {
 				arquivo.transferTo(new File(this.localTemporario.toAbsolutePath().toString()
 						+ getDefault().getSeparator() + novoNome));			

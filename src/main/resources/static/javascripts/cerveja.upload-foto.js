@@ -11,7 +11,7 @@ Brewer.UploadFoto = (function() {
 		this.uploadDrop = $('#upload-drop');
 	}
 	
-	UploadFoto.prototype.iniciar = function() {
+	UploadFoto.prototype.iniciar = function() {		
 		var settings = {
 				type: 'json',
 				filelimit: 1,
@@ -23,7 +23,7 @@ Brewer.UploadFoto = (function() {
 		UIkit.uploadSelect($('#upload-select'), settings);
 		UIkit.uploadDrop($(this.uploadDrop), settings);
 		
-		if(this.inputNomeFoto.val()) {
+		if(this.inputNomeFoto.val()) {			
 			onUploadCompleto.call(this, { nome: this.inputNomeFoto.val(), contentType: this.inputContentType.val()});
 		}
 	}
