@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,7 +57,7 @@ public class CervejasController {
 		return new ModelAndView("redirect:/cervejas/novo");
 	}
 	
-	@RequestMapping
+	@GetMapping
 	public ModelAndView pesquisar(CervejaFilter cervejaFilter, BindingResult result, 
 			@PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("/cerveja/PesquisaCervejas");
